@@ -4,15 +4,6 @@
     font-family: sans-serif;
 }
 
-:root {
-    --primary-color: #B6D2F3;
-    --secondary-color: #183354;
-    --link-text-color: #515151;
-    --link-hover-color: #2E81E0;
-    --link-click-color: #1B3E67;
-    --link-selected-color: #191919;
-}
-
 #header {
     width: 100vw;
     height: 10vh;
@@ -96,4 +87,23 @@
     background-color: var(--link-click-color);
     width: 50px;
     transition: width 0.2s ease-in-out;
+}
+
+/* FOR HOME PAGE */
+
+.courses-h, .signup-h, .bug-report-h {
+    font-size: 25px;
+}
+
+.courses-h::after, .signup-h::after, .bug-report-h::after {
+    width: 60px;
+    height: 3px;
+}
+
+.courses-h:hover:after, .signup-h:hover::after, .bug-report-h:hover::after {
+    width: 70px;
+}
+
+.courses-h:active:after, .signup-h:active::after, .bug-report-h:active::after {
+    width: 80px;
 }

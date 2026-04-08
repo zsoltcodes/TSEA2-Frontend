@@ -1,0 +1,78 @@
+body {
+    overflow-x: hidden;
+}
+
+:root {
+    --primary-color: #B6D2F3;
+    --secondary-color: #183354;
+    --link-text-color: #515151;
+    --link-hover-color: #2E81E0;
+    --link-click-color: #1B3E67;
+    --link-selected-color: #191919;
+    
+    --text-color: #1B1B1B;
+}
+
+#intro {
+    background-color: #ffffff;
+}
+
+#course-intro {
+    background-color: var(--primary-color);
+}
+
+#signup {
+    background-color: #ffffff;
+}
+
+#bug-report {
+    width: 100vw;
+    height: 40vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 50px;
+    background-color: var(--primary-color);
+    flex-direction: column;
+}
+
+#bug-report .upper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+}
+
+#intro, #course-intro, #signup {
+    width: 100vw;
+    height: 40vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20%;
+}
+
+.left, .right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 50px;
+}
+
+#intro .right {
+    gap: 50px;
+}
+
+h1, h3, p {
+    color: var(--text-color);
+}
+
+p {
+    width: 450px;
+}
+
+.js-logo {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
