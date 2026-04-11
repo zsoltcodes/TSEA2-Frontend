@@ -1,0 +1,153 @@
+body {
+    overflow-x: hidden;
+}
+
+:root {
+    --primary-color: #B6D2F3;
+    --secondary-color: #183354;
+    --link-text-color: #515151;
+    --link-hover-color: #2E81E0;
+    --link-click-color: #1B3E67;
+    --link-selected-color: #191919;
+    
+    --text-color: #1B1B1B;
+}
+
+.search-bar-container {
+    background-color: #B6D2F3;
+    width: 100%;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-bar-subcontainer {
+    width: 450px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: #ffffff;
+    border-radius: 5px;
+    border: 2px solid rgb(26, 26, 26);
+}
+
+.search-bar {
+    width: 400px;
+    height: 40px;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 20px;
+    color: #181818;
+    border: 0px;
+}
+
+.courses-container {
+    width: 100%;
+    height: 700px;
+    display: flex;
+    flex-direction: column;
+    gap: 100px;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 50px;
+    color: #ffffff;
+}
+
+.title {
+    font-size: 30px;
+    color: #3d3d3d;
+}
+
+.course-list {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 100%;
+    height: 500px;
+    gap: 50px;
+}
+
+.course-list {
+    width: 100%;
+    height: 100%;
+    display: flex;
+
+}
+
+.card {
+    width: 300px;
+    height: 400px;
+    background-color: #2C2C2C;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+    border-radius: 10px;
+}
+
+.card-title {
+    font-size: 35px;
+}
+
+.js-title {
+    color: #E9D667;
+}
+
+.cpp-title {
+    color: #C067E9;
+}
+
+.py-title {
+    color: rgb(64, 144, 218);
+}
+
+.sub-infos { 
+    width: 100%;
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.duration, .difficulty {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.skills-gained {
+    width: 100%;
+    height: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 5px;
+    flex-direction: column;
+}
+
+.box-head {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 10px;
+}
+
+.main-text {
+    font-size: 20px;
+}
+
+.sub-text {
+    color: #4999E0;
+}
+
+.link-to-course {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
