@@ -16,6 +16,7 @@ async function loadComponent(sectionId, filePath, jsRequired = false) {
         
         const cssPath = filePath.replace(/\.html$/, '.css');
         loadCSS(cssPath);
+        console.log("CSS loaded")
 
         if (jsRequired) {
             const jsPath = filePath.replace(/\.html$/, '.js');

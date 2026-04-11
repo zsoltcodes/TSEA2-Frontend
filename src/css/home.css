@@ -13,19 +13,19 @@ body {
     --text-color: #1B1B1B;
 }
 
-#intro {
+#intro-section {
     background-color: #ffffff;
 }
 
-#course-intro {
+#course-intro-section {
     background-color: var(--primary-color);
 }
 
-#signup {
+#signup-section {
     background-color: #ffffff;
 }
 
-#bug-report {
+#bug-report-section {
     width: 100vw;
     height: 40vh;
     display: flex;
@@ -37,14 +37,14 @@ body {
     flex-direction: column;
 }
 
-#bug-report .upper {
+#bug-report-section .upper {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 50px;
 }
 
-#intro, #course-intro, #signup {
+#intro-section, #course-intro-section, #signup-section {
     width: 100vw;
     height: 40vh;
     display: flex;
@@ -53,7 +53,7 @@ body {
     gap: 20%;
 }
 
-.left, .right {
+.left-side, .right-side {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -61,7 +61,7 @@ body {
     gap: 50px;
 }
 
-#intro .right {
+#intro .right-side {
     gap: 50px;
 }
 
