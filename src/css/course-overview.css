@@ -1,0 +1,148 @@
+.summary-container {
+    padding: 5em;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+}
+
+.course-summary {
+    background-color: var(--primary-color);
+}
+
+.course-summary h1 {
+    margin-bottom: 0.3em;
+}
+
+.summary-container h3 {
+    font-size: 30px;
+    margin-bottom: 1em;
+}
+
+.course-summary .left p {
+    margin-bottom: 2em;
+}
+
+h1 {
+    font-size: 40px;
+}
+
+p {
+    font-size: 18px;
+}
+
+#course-contents-container h2 {
+    text-align: center;
+    padding: 1em;
+}
+
+.content-title {
+    border-top: solid 1px black;
+    border-bottom: solid 1px black;
+}
+
+.difficulty svg {
+    display: block;
+}
+
+.course-meta {
+    width: 16em;
+}
+
+.course-meta hr {
+    margin: 40px 0;
+}
+
+.course-meta-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.meta-difficulty {
+    align-items: flex-end;
+}
+
+.meta-duration {
+    align-items: center;
+}
+
+.course-meta-container p {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.difficulty .bar-1 {
+    fill: var(--skill-bar-active);
+}
+
+.difficulty .bar-2,
+.bar-3 {
+    fill: var(--skill-bar-inactive);
+}
+
+.course-skill {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.course-skill p {
+    padding: 0.5em;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.check {
+    fill: green;
+}
+
+.why-choose {
+    width: 40%;
+}
+
+.why-choose p {
+    font-style: italic;
+    font-size: 20px;
+}
+
+.table-container {
+    width: 70em;
+    margin: 1em auto;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    overflow: hidden; /* makes radius actually work */
+}
+
+.course-contents {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.course-contents td {
+    padding: 1em 2em;
+    text-align: left;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.course-contents tr:last-child td {
+    border-bottom: none;
+}
+
+.course-contents tr {
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.course-contents tr div {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.course-contents p {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.course-contents tr:hover {
+    background-color: lightgray;
+}

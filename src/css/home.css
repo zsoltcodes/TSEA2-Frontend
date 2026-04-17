@@ -2,17 +2,6 @@ body {
     overflow-x: hidden;
 }
 
-:root {
-    --primary-color: #B6D2F3;
-    --secondary-color: #183354;
-    --link-text-color: #515151;
-    --link-hover-color: #2E81E0;
-    --link-click-color: #1B3E67;
-    --link-selected-color: #191919;
-    
-    --text-color: #1B1B1B;
-}
-
 #intro-section {
     background-color: #ffffff;
 }
@@ -44,7 +33,9 @@ body {
     gap: 50px;
 }
 
-#intro-section, #course-intro-section, #signup-section {
+#intro-section,
+#course-intro-section,
+#signup-section {
     width: 100vw;
     height: 40vh;
     display: flex;
@@ -53,7 +44,8 @@ body {
     gap: 20%;
 }
 
-.left-side, .right-side {
+.left-side,
+.right-side {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -65,14 +57,12 @@ body {
     gap: 50px;
 }
 
-h1, h3, p {
-    color: var(--text-color);
-}
-
 p {
     width: 450px;
 }
 
 .js-logo {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    box-shadow:
+        0 4px 8px 0 rgba(0, 0, 0, 0.2),
+        0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }

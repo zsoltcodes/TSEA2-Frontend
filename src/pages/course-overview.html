@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>CodeNest - Course Overview</title>
+        <link
+            rel="icon"
+            href="../../../public/favicon_CN.png"
+            type="image/x-icon"
+        />
+        <link rel="stylesheet" href="../css/course-overview.css" />
+    </head>
+    <body data-page="courses">
+        <header id="header"></header>
+
+        <section class="summary-container course-summary">
+            <div class="left">
+                <h1 id="course-title">Learn by Doing with JavaScript</h1>
+                <p id="course-description">
+                    Apply your knowledge to a range of projects. Test yourself
+                    with quizzes and fill gaps retrieval.
+                </p>
+
+                <button id="start-btn">START</button>
+            </div>
+
+            <div class="course-meta">
+                <div class="course-meta-container meta-difficulty">
+                    <p>Difficulty</p>
+                    <div class="difficulty">
+                        <svg
+                            style="width: 50px; margin-right: 10px"
+                            viewBox="2 0 19 26"
+                        >
+                            <rect
+                                class="bar-1"
+                                x="2"
+                                y="14"
+                                width="5"
+                                height="10"
+                                rx="2"
+                            />
+                            <rect
+                                class="bar-2"
+                                x="9"
+                                y="9"
+                                width="5"
+                                height="15"
+                                rx="2"
+                            />
+                            <rect
+                                class="bar-3"
+                                x="16"
+                                y="4"
+                                width="5"
+                                height="20"
+                                rx="2"
+                            />
+                        </svg>
+                    </div>
+                </div>
+
+                <hr />
+
+                <div class="course-meta-container meta-duration">
+                    <p>Duration (hrs)</p>
+                    <div class="circle-text">20</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="summary-container">
+            <div id="features-container">
+                <h3>What skills will I gain?</h3>
+                <div class="course-skill"></div>
+            </div>
+
+            <div class="why-choose">
+                <h3>Why choose this course?</h3>
+                <p>
+                    CodeNest provides you with clear, progressive learning
+                    materials and allows you to set the pace to your liking. We
+                    offer the course at no cost to enable you to develop
+                    essential skills for becoming a confident JavaScript.
+                </p>
+            </div>
+        </section>
+
+        <section id="course-contents-container">
+            <div class="content-title">
+                <h2>Content</h2>
+            </div>
+
+            <div class="table-container">
+                <table class="course-contents">
+                    <tbody id="course-contents"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <footer id="footer"></footer>
+
+        <script src="../js/loadComponents.js"></script>
+        <script type="module" src="../js/api.js"></script>
+        <script type="module" src="../js/courseOverview.js"></script>
+    </body>
+</html>

@@ -1,0 +1,73 @@
+:root {
+    --primary-color: #b6d2f3;
+    --secondary-color: #183354;
+
+    --link-text-color: #515151;
+    --link-hover-color: #2e81e0;
+    --link-click-color: #1b3e67;
+    --link-selected-color: #191919;
+
+    --btn-color-primary: black;
+
+    --text-color: #1b1b1b;
+
+    --skill-bar-inactive: #2e81e0;
+    --skill-bar-active: #1b3e67;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Inter", sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+    margin: 0;
+    color: var(--text-color);
+}
+
+hr {
+    margin: 1.5em 0;
+    border: none;
+    border-top: 1px solid black;
+    opacity: 0.2;
+}
+
+button {
+    padding: 0.9em 5em;
+    font-size: 20px;
+    border-radius: 5px;
+
+    color: white;
+    font-weight: normal;
+    background-color: var(--btn-color-primary);
+
+    outline: none;
+    border: none;
+
+    cursor: pointer;
+}
+
+.circle-text {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 999px;
+
+    width: 2.2em;
+    height: 2.2em;
+
+    font-size: 28px;
+    font-weight: bold;
+}

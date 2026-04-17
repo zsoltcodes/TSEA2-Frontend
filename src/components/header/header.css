@@ -1,7 +1,8 @@
-*, *::before, *::after {
+*,
+*::before,
+*::after {
     padding: 0px;
     margin: 0px;
-    font-family: sans-serif;
 }
 
 #header {
@@ -36,7 +37,8 @@
     word-spacing: -5px;
 }
 
-.code-text, .nest-text {
+.code-text,
+.nest-text {
     font-size: 30px;
     font-weight: bold;
 }
@@ -66,7 +68,7 @@
 }
 
 .nav-btn::after {
-    content: '';
+    content: "";
     position: absolute;
     width: 30px;
     height: 2px;
@@ -91,19 +93,27 @@
 
 /* FOR HOME PAGE */
 
-.courses-h, .signup-h, .bug-report-h {
+.courses-h,
+.signup-h,
+.bug-report-h {
     font-size: 25px;
 }
 
-.courses-h::after, .signup-h::after, .bug-report-h::after {
+.courses-h::after,
+.signup-h::after,
+.bug-report-h::after {
     width: 60px;
     height: 3px;
 }
 
-.courses-h:hover:after, .signup-h:hover::after, .bug-report-h:hover::after {
+.courses-h:hover:after,
+.signup-h:hover::after,
+.bug-report-h:hover::after {
     width: 70px;
 }
 
-.courses-h:active:after, .signup-h:active::after, .bug-report-h:active::after {
+.courses-h:active:after,
+.signup-h:active::after,
+.bug-report-h:active::after {
     width: 80px;
 }
