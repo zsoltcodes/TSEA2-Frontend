@@ -9,4 +9,4 @@
 
 ## Project Notes
 
-- Include "<script src="../js/loadComponents.js"></script>" at the very bottom in the body element in every web page created.
+- Include "<script type="module" src="../js/loadComponents.js"></script>" at the very bottom in the body element in every web page created.

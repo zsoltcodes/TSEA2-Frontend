@@ -97,7 +97,7 @@ function addCourseContentRow(content) {
     tr.appendChild(td);
 
     tr.addEventListener("click", () => {
-        openContentPage(content);
+        openContentPage(courseSlug, content.slug);
     });
 
     contentsContainer.appendChild(tr);
@@ -132,7 +132,7 @@ async function loadCourse() {
 
     const startBtn = document.getElementById("start-btn");
     startBtn.addEventListener("click", () => {
-        openContentPage(course.contents[0]);
+        openContentPage(courseSlug, course.contents[0].slug);
     });
 }
 
