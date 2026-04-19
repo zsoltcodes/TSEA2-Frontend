@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>CodeNest - Course Content</title>
+        <link
+            rel="icon"
+            href="../../../public/favicon_CN.png"
+            type="image/x-icon"
+        />
+        <link rel="stylesheet" href="../css/course-content.css" />
+    </head>
+    <body data-page="content">
+        <header id="header"></header>
+
+        <div class="lesson-banner">
+            <img src="/public/book-open-solid-full.svg" alt="" width="40px" />
+            <h3>Lesson</h3>
+        </div>
+
+        <div class="content-container"></div>
+
+        <div class="content-navigator">
+            <div style="display: flex; align-items: center; gap: 20px">
+                <div id="content-icon-container"></div>
+                <p id="title">Arithematic Operators</p>
+            </div>
+            <p id="page">1/6</p>
+            <div style="display: flex; gap: 15px">
+                <button class="btn-previous">Previous</button>
+                <button class="btn-next">Next</button>
+            </div>
+        </div>
+
+        <footer id="footer"></footer>
+
+        <script src="https://cdn.jsdelivr.net/npm/@oblivionocean/minigfm/dist/index.min.js"></script>
+        <script type="module" src="../js/loadComponents.js"></script>
+        <script type="module" src="../js/api.js"></script>
+        <script type="module" src="../js/content.js"></script>
+        <script type="module" src="../js/courseContent.js"></script>
+    </body>
+</html>

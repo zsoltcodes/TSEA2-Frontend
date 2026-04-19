@@ -55,6 +55,11 @@ button {
     cursor: pointer;
 }
 
+button:disabled {
+    cursor: not-allowed;
+    background-color: gray !important;
+}
+
 .circle-text {
     background-color: var(--secondary-color);
     color: var(--primary-color);

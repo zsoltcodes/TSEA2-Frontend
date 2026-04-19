@@ -78,6 +78,17 @@ function loadJS(filePath) {
     document.body.appendChild(scriptEl);
 }
 
+/** Loads SVG into a specified element ID*/
+export async function loadSvg(parentId, url) {
+    const response = await fetch(url);
+    if (!response.ok) {
+        throw new Error(`Failed to load SVG at: ${url}`);
+    }
+
+    const parent = document.getElementById(parentId);
+    parent.innerHTML = await response.text();
+}
+
 /* Load global styles and fonts */
 loadFont(
     "https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap",
