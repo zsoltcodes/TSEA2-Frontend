@@ -1,0 +1,51 @@
+.lesson-banner {
+    display: none; /* Dynamically set to flex when a lesson is loaded */
+    align-items: center;
+    padding: 1em;
+    gap: 15px;
+    background-color: #efe2e2;
+}
+
+.content-container {
+    padding: 2em 10em;
+}
+
+.content-navigator {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 1em 3em;
+    background-color: #1e1e1e;
+
+    font-size: 20px;
+
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.content-navigator p {
+    color: white;
+}
+
+.content-navigator button {
+    padding: 0;
+    width: 10em;
+    height: 3em;
+    font-weight: 500;
+}
+
+.content-navigator .btn-previous {
+    background-color: rgb(41, 66, 120);
+}
+
+.content-navigator .btn-next {
+    background-color: rgb(0, 115, 255);
+}
+
+#content-icon-container svg {
+    fill: white;
+    width: 40px;
+}

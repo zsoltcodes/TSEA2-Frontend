@@ -1,5 +1,19 @@
 import { request } from "./api.js";
 import { PAGE_TITLE_PREFIX } from "./constants.js";
+import { openContentPage, getIconUrlFromCourseContentType } from "./content.js";
+
+function decodeCourse() {
+    const queryParams = new URLSearchParams(window.location.search);
+    const courseSlug = decodeURIComponent(queryParams.get("course"));
+    if (!courseSlug) {
+        alert("No course specified");
+        window.history.back();
+    }
+
+    return courseSlug;
+}
+
+const courseSlug = decodeCourse();
 
 const difficultyBars = [
     document.querySelector(".difficulty .bar-1"),
@@ -54,22 +68,6 @@ function addSkill(skillText) {
 
 const contentsContainer = document.getElementById("course-contents");
 
-/** Get icon image url from course content type string */
-function getIconUrlFromCourseContentType(type) {
-    switch (type) {
-        case "lesson":
-            return "/public/book-open-solid-full.svg";
-        case "quiz":
-            return "/public/question-solid-full.svg";
-        case "retrieval":
-            return "/public/brain-solid-full.svg";
-    }
-}
-
-function openContentPage(content) {
-    window.location.assign(`./course-content.html?content=${content.slug}`);
-}
-
 /** Add course content row to the content list table */
 function addCourseContentRow(content) {
     const tr = document.createElement("tr");
@@ -99,7 +97,7 @@ function addCourseContentRow(content) {
     tr.appendChild(td);
 
     tr.addEventListener("click", () => {
-        openContentPage(content);
+        openContentPage(courseSlug, content.slug);
     });
 
     contentsContainer.appendChild(tr);
@@ -107,13 +105,6 @@ function addCourseContentRow(content) {
 
 /** Loads the course provided in the query parameters and populates the page */
 async function loadCourse() {
-    const queryParams = new URLSearchParams(window.location.search);
-    const courseSlug = decodeURIComponent(queryParams.get("course"));
-    if (!courseSlug) {
-        alert("No course specified");
-        window.history.back();
-    }
-
     const course = await request(`/courses/${courseSlug}`);
     if (!course) {
         alert(`Could not find course: '${courseSlug}'`);
@@ -141,7 +132,7 @@ async function loadCourse() {
 
     const startBtn = document.getElementById("start-btn");
     startBtn.addEventListener("click", () => {
-        openContentPage(course.contents[0]);
+        openContentPage(courseSlug, course.contents[0].slug);
     });
 }
 
