@@ -44,6 +44,57 @@ function initialiseNavigationBtn(button, contentSlug) {
     button.disabled = true;
 }
 
+function renderQuiz(questions) {
+    const container = document.querySelector(".content-container");
+    container.innerHTML = "";
+
+    questions.forEach((q, index) => {
+        const wrapper = document.createElement("div");
+        wrapper.className = "quiz-question";
+
+        container.appendChild(wrapper);
+
+        const title = document.createElement("h3");
+        title.textContent = `${index + 1}. ${q.question}`;
+        wrapper.appendChild(title);
+
+        const optionsContainer = document.createElement("div");
+        optionsContainer.className = "quiz-options";
+
+        q.options.forEach((option) => {
+            const btn = document.createElement("button");
+            btn.textContent = option.text;
+
+            btn.onclick = () => {
+                if (option.correct) {
+                    btn.style.backgroundColor = "green";
+                    btn.style.color = "white";
+
+                    const correctBtn = [...optionsContainer.children].find(b => b.dataset.correct === "true");
+                    if (correctBtn) {
+                        correctBtn.style.backgroundColor = "green";
+                        correctBtn.style.color = "white";
+                    }
+                } else {
+                    btn.style.backgroundColor = "red";
+                    btn.style.color = "white";
+                }
+            };
+
+            if (option.correct) {
+                btn.dataset.correct = "true";
+            }
+
+            optionsContainer.appendChild(btn);
+        });
+
+        wrapper.appendChild(optionsContainer);
+        container.appendChild(wrapper);
+    })
+
+
+}
+
 /** Loads the course content provided in the query parameters and populates the page */
 async function loadContent() {
     const { course, content } = await request(
@@ -66,6 +117,8 @@ async function loadContent() {
 
     if (content.type === "lesson") {
         lessonBanner.style.display = "flex";
+    } else if (content.type === "quiz") {
+        renderQuiz(content.content);
     }
 
     initialiseNavigationBtn(previousBtn, content.previousSlug);
