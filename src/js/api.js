@@ -7,6 +7,7 @@ export async function request(path, method = "GET") {
         {
             method,
             headers: { "Content-Type": "json" },
+            credentials: "include",
         },
     );
 
@@ -15,4 +16,13 @@ export async function request(path, method = "GET") {
     }
 
     return await response.json();
+}
+
+let user = null;
+
+export async function getUser() {
+    if (user) return user;
+
+    user = await request("/auth/me");
+    return user;
 }
