@@ -1,11 +1,10 @@
+import { request } from "./api.js";
+
 async function loadCourses() {
     try {
-        const res = await fetch("http://127.0.0.1:8000/api/courses/");
-        const courses = await res.json();
-
-        console.log(courses) // Delete
+        const courses = await request("/courses");
         renderCourses(courses);
-    } catch(err) {
+    } catch (err) {
         console.error("Failed to load courses: ", err);
     }
 }
@@ -19,18 +18,18 @@ function renderCourses(courses) {
 
     const skillsList = document.querySelector(".skills-list");
 
-    courses.forEach(course => {
+    courses.forEach((course) => {
         courseTitle.innerHTML = `${course.title}`;
         durationHighlight.innerHTML = `${course.durationHrs}`;
         difficultyHighlight.innerHTML = `${course.difficulty}`;
-        
-        course.skills.forEach(skill => {
+
+        course.skills.forEach((skill) => {
             const span = document.createElement("span");
             span.textContent = skill;
             span.className = "skill";
             skillsList.appendChild(span);
-        })
-    })
+        });
+    });
 }
 
 loadCourses();

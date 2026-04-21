@@ -25,7 +25,6 @@ function decodeCourseContent() {
 const { courseSlug, contentSlug } = decodeCourseContent();
 
 const md = new MiniGFM();
-const contentIconImgEl = document.querySelector(".content-navigator #icon");
 const contentTitleTextEl = document.querySelector(".content-navigator #title");
 const pageTextEl = document.querySelector(".content-navigator #page");
 const lessonBanner = document.querySelector(".lesson-banner");
@@ -70,7 +69,9 @@ function renderQuiz(questions) {
                     btn.style.backgroundColor = "green";
                     btn.style.color = "white";
 
-                    const correctBtn = [...optionsContainer.children].find(b => b.dataset.correct === "true");
+                    const correctBtn = [...optionsContainer.children].find(
+                        (b) => b.dataset.correct === "true",
+                    );
                     if (correctBtn) {
                         correctBtn.style.backgroundColor = "green";
                         correctBtn.style.color = "white";
@@ -90,9 +91,7 @@ function renderQuiz(questions) {
 
         wrapper.appendChild(optionsContainer);
         container.appendChild(wrapper);
-    })
-
-
+    });
 }
 
 /** Loads the course content provided in the query parameters and populates the page */
