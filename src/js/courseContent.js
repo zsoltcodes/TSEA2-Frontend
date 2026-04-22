@@ -1,4 +1,5 @@
 import { request } from "./api.js";
+import { capitalise } from "./strings.js";
 import { PAGE_TITLE_PREFIX } from "./constants.js";
 import { openContentPage, getIconUrlFromCourseContentType } from "./content.js";
 import { loadSvg } from "./loadComponents.js";
@@ -27,21 +28,9 @@ const { courseSlug, contentSlug } = decodeCourseContent();
 const md = new MiniGFM();
 const contentTitleTextEl = document.querySelector(".content-navigator #title");
 const pageTextEl = document.querySelector(".content-navigator #page");
-const lessonBanner = document.querySelector(".lesson-banner");
 
 const nextBtn = document.querySelector(".btn-next");
 const previousBtn = document.querySelector(".btn-previous");
-
-function initialiseNavigationBtn(button, contentSlug) {
-    if (contentSlug) {
-        button.disabled = false;
-        button.onclick = () => openContentPage(courseSlug, contentSlug);
-        return;
-    }
-
-    button.onclick = null;
-    button.disabled = true;
-}
 
 function renderQuiz(questions) {
     const container = document.querySelector(".content-container");
@@ -94,6 +83,23 @@ function renderQuiz(questions) {
     });
 }
 
+function initialiseNavigationBtn(button, contentSlug) {
+    if (contentSlug) {
+        button.disabled = false;
+        button.onclick = () => openContentPage(courseSlug, contentSlug);
+        return;
+    }
+
+    button.onclick = null;
+    button.disabled = true;
+}
+
+async function renderLesson({ content }) {
+    const html = md.parse(content);
+    const contentContainer = document.querySelector(".content-container");
+    contentContainer.innerHTML = html;
+}
+
 /** Loads the course content provided in the query parameters and populates the page */
 async function loadContent() {
     const { course, content } = await request(
@@ -101,23 +107,28 @@ async function loadContent() {
     );
 
     document.title = PAGE_TITLE_PREFIX + content.title;
-    const html = md.parse(content.content);
 
-    const contentContainer = document.querySelector(".content-container");
-    contentContainer.innerHTML = html;
-
-    await loadSvg(
-        "content-icon-container",
-        getIconUrlFromCourseContentType(content.type),
-    );
+    const contentIconUrl = getIconUrlFromCourseContentType(content.type);
+    await loadSvg("content-icon-container", contentIconUrl);
+    await loadSvg("navigation-content-icon-container", contentIconUrl);
 
     contentTitleTextEl.textContent = content.title;
     pageTextEl.textContent = `${content.position}/${course.contentLength}`;
 
-    if (content.type === "lesson") {
-        lessonBanner.style.display = "flex";
-    } else if (content.type === "quiz") {
-        renderQuiz(content.content);
+    const quizBannerText = document.getElementById("content-banner-text");
+    quizBannerText.textContent = capitalise(content.type);
+
+    switch (content.type) {
+        case "lesson":
+            renderLesson(content);
+            break;
+
+        case "quiz":
+            renderQuiz(content.content);
+            break;
+
+        default:
+            break;
     }
 
     initialiseNavigationBtn(previousBtn, content.previousSlug);

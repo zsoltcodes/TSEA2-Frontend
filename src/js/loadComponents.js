@@ -113,4 +113,4 @@ if (currentPage == "home") {
 
 /* Header */
 
-loadComponent("header", "../components/header/header.html", true);
+loadComponent("header", "../components/header/header.html");
