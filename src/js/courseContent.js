@@ -32,15 +32,58 @@ const pageTextEl = document.querySelector(".content-navigator #page");
 const nextBtn = document.querySelector(".btn-next");
 const previousBtn = document.querySelector(".btn-previous");
 
+function calculateCompletionProgress(questionsLength, completedQuestions) {
+    const completionPercentage = Math.floor(
+        (completedQuestions / questionsLength) * 100,
+    );
+
+    const remainingQuestions = questionsLength - completedQuestions;
+
+    return { completionPercentage, remainingQuestions };
+}
+
+function renderProgress(questionsLength, completedQuestions) {
+    const { completionPercentage, remainingQuestions } =
+        calculateCompletionProgress(questionsLength, completedQuestions);
+
+    const questionsAnsweredTextEl = document.getElementById(
+        "questions-answered-text",
+    );
+    const questionsRemainingTextEl = document.getElementById(
+        "questions-remaining-text",
+    );
+
+    questionsAnsweredTextEl.textContent = `${completionPercentage}% Completed`;
+    questionsRemainingTextEl.textContent = `${questionsLength - completedQuestions} Question${remainingQuestions > 1 ? "s" : ""} Remaining`;
+
+    const progressEl = document.querySelector(".progress-bar-progress");
+    progressEl.style.width = `${completionPercentage}%`;
+}
+
+function quizCorrectOption(optionsContainer, btn) {
+    btn.style.backgroundColor = "green";
+    btn.style.color = "white";
+
+    const correctBtn = [...optionsContainer.children].find(
+        (b) => b.dataset.correct === "true",
+    );
+
+    if (correctBtn) {
+        correctBtn.style.backgroundColor = "green";
+        correctBtn.style.color = "white";
+    }
+}
+
 function renderQuiz(questions) {
-    const container = document.querySelector(".content-container");
-    container.innerHTML = "";
+    const quizContainer = document.querySelector(".quiz-container");
+    let completedQuestions = 0;
+    renderProgress(questions.length, completedQuestions);
 
     questions.forEach((q, index) => {
         const wrapper = document.createElement("div");
         wrapper.className = "quiz-question";
 
-        container.appendChild(wrapper);
+        quizContainer.appendChild(wrapper);
 
         const title = document.createElement("h3");
         title.textContent = `${index + 1}. ${q.question}`;
@@ -49,26 +92,25 @@ function renderQuiz(questions) {
         const optionsContainer = document.createElement("div");
         optionsContainer.className = "quiz-options";
 
+        let isQuestionCompleted = false;
+
         q.options.forEach((option) => {
             const btn = document.createElement("button");
             btn.textContent = option.text;
 
             btn.onclick = () => {
-                if (option.correct) {
-                    btn.style.backgroundColor = "green";
-                    btn.style.color = "white";
+                if (isQuestionCompleted) return;
 
-                    const correctBtn = [...optionsContainer.children].find(
-                        (b) => b.dataset.correct === "true",
-                    );
-                    if (correctBtn) {
-                        correctBtn.style.backgroundColor = "green";
-                        correctBtn.style.color = "white";
-                    }
-                } else {
+                if (!option.correct) {
                     btn.style.backgroundColor = "red";
                     btn.style.color = "white";
+                    return;
                 }
+
+                isQuestionCompleted = true;
+
+                quizCorrectOption(optionsContainer, btn);
+                renderProgress(questions.length, ++completedQuestions);
             };
 
             if (option.correct) {
@@ -79,7 +121,7 @@ function renderQuiz(questions) {
         });
 
         wrapper.appendChild(optionsContainer);
-        container.appendChild(wrapper);
+        quizContainer.appendChild(wrapper);
     });
 }
 

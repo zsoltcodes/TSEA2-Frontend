@@ -66,10 +66,13 @@ body {
     width: 40px;
 }
 
-.quiz-question {
+.quiz-container {
     width: 80%;
-    height: 30%;
+}
+
+.quiz-question {
     padding: 100px 80px 100px 80px;
+    margin-bottom: 5em;
 
     display: flex;
     flex-direction: column;
@@ -111,4 +114,40 @@ body {
     font-size: 20px;
 
     width: 80%;
+}
+
+.progress-bar-container {
+    margin-bottom: 2em;
+}
+
+.progress-bar {
+    background-color: white;
+    border-radius: 15px;
+    border: solid 1px black;
+    height: 2.2em;
+}
+
+.progress-bar-progress {
+    background-color: var(--primary-color);
+    border-radius: 15px;
+    width: 70%;
+    height: 100%;
+
+    display: flex;
+    justify-content: right;
+    align-items: center;
+}
+
+#questions-remaining-text {
+    margin-top: 0.5em;
+    text-align: right;
+    font-size: 20px;
+}
+
+#questions-answered-text {
+    margin-right: 1em;
+    font-size: 20px;
+    text-align: right;
+
+    overflow: hidden;
 }
