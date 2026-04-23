@@ -42,7 +42,17 @@ function calculateCompletionProgress(questionsLength, completedQuestions) {
     return { completionPercentage, remainingQuestions };
 }
 
-function renderProgress(questionsLength, completedQuestions) {
+function showProgressBar() {
+    const progressBar = document.querySelector(".progress-bar-container");
+    progressBar.style.display = "block";
+}
+
+function hideProgressBar() {
+    const progressBar = document.querySelector(".progress-bar-container");
+    progressBar.style.display = "none";
+}
+
+function renderProgressBar(questionsLength, completedQuestions) {
     const { completionPercentage, remainingQuestions } =
         calculateCompletionProgress(questionsLength, completedQuestions);
 
@@ -54,10 +64,15 @@ function renderProgress(questionsLength, completedQuestions) {
     );
 
     questionsAnsweredTextEl.textContent = `${completionPercentage}% Completed`;
-    questionsRemainingTextEl.textContent = `${questionsLength - completedQuestions} Question${remainingQuestions > 1 ? "s" : ""} Remaining`;
+    questionsRemainingTextEl.textContent = `${questionsLength - completedQuestions} Question${remainingQuestions != 1 ? "s" : ""} Remaining`;
 
     const progressEl = document.querySelector(".progress-bar-progress");
     progressEl.style.width = `${completionPercentage}%`;
+
+    if (completedQuestions === questionsLength) {
+        progressEl.style.color = "white";
+        progressEl.style.backgroundColor = "green";
+    }
 }
 
 function quizCorrectOption(optionsContainer, btn) {
@@ -74,14 +89,146 @@ function quizCorrectOption(optionsContainer, btn) {
     }
 }
 
-function renderQuiz(questions) {
-    const quizContainer = document.querySelector(".quiz-container");
+function computeTextWidth(text, font) {
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
+    ctx.font = font;
+
+    return ctx.measureText(text).width;
+}
+
+function renderRetrievalInput(question, container) {
+    const { answers, retrieval } = question;
+
+    let answerIdx = 0;
+
+    const expectedInputs = [];
+
+    const parts = retrieval.split("%blank%");
+    parts.forEach((part, index) => {
+        if (part) {
+            const em = document.createElement("em");
+            em.innerHTML = part.replace(" ", "&nbsp;");
+            container.appendChild(em);
+        }
+
+        if (index < parts.length - 1) {
+            const input = document.createElement("input");
+
+            const expectedAnswer = answers[answerIdx++];
+
+            input.style.width =
+                computeTextWidth(expectedAnswer, "30px Inter") + "px";
+
+            container.appendChild(input);
+
+            expectedInputs.push({
+                inputElement: input,
+                expectedAnswer,
+
+                isCorrect: () => {
+                    return (
+                        input.value.trim().toLowerCase() ==
+                        expectedAnswer.trim().toLowerCase()
+                    );
+                },
+            });
+        }
+    });
+
+    return expectedInputs;
+}
+
+function renderRetrieval(questions) {
+    const retrievalContainer = document.querySelector(".questions-container");
     let completedQuestions = 0;
-    renderProgress(questions.length, completedQuestions);
+
+    showProgressBar();
+    renderProgressBar(questions.length, completedQuestions);
+
+    questions.forEach((q, idx) => {
+        const wrapper = document.createElement("div");
+        wrapper.className = "question";
+
+        retrievalContainer.appendChild(wrapper);
+
+        const title = document.createElement("h3");
+        title.textContent = `${idx + 1}. ${q.question}`;
+        wrapper.appendChild(title);
+
+        const retrievalInputContainer = document.createElement("div");
+        const expectedInputs = renderRetrievalInput(q, retrievalInputContainer);
+
+        const checkBtn = document.createElement("button");
+        checkBtn.textContent = "Check";
+
+        const retrievalStatusContainer = document.createElement("div");
+        retrievalStatusContainer.className = "retrieval-status-container";
+        retrievalStatusContainer.style.display = "none";
+
+        const retrievalStatusIconImg = document.createElement("img");
+        retrievalStatusIconImg.style.width = "60px";
+
+        const retrievalStatusText = document.createElement("p");
+
+        retrievalStatusContainer.appendChild(retrievalStatusIconImg);
+        retrievalStatusContainer.appendChild(retrievalStatusText);
+
+        checkBtn.addEventListener("click", () => {
+            let allCorrect = true;
+
+            expectedInputs.forEach((expectedInput) => {
+                const isCorrect = expectedInput.isCorrect();
+                const { inputElement } = expectedInput;
+
+                if (!isCorrect) {
+                    inputElement.style.backgroundColor = "lightcoral";
+                    allCorrect = false;
+                    return;
+                }
+
+                inputElement.style.backgroundColor = "lightgreen";
+            });
+
+            retrievalStatusContainer.style.display = "flex";
+
+            if (!allCorrect) {
+                retrievalStatusIconImg.src =
+                    "/public/circle-xmark-solid-full.svg";
+                retrievalStatusText.textContent = "Incorrect";
+
+                return;
+            }
+
+            retrievalStatusIconImg.src = "/public/circle-check-solid-full.svg";
+            retrievalStatusText.textContent = "Correct!";
+
+            checkBtn.disabled = true;
+            expectedInputs.forEach(
+                ({ inputElement }) => (inputElement.disabled = true),
+            );
+
+            renderProgressBar(questions.length, ++completedQuestions);
+        });
+
+        wrapper.appendChild(retrievalInputContainer);
+        wrapper.appendChild(checkBtn);
+        wrapper.appendChild(retrievalStatusContainer);
+
+        retrievalContainer.appendChild(wrapper);
+    });
+}
+
+function renderQuiz(questions) {
+    const quizContainer = document.querySelector(".questions-container");
+    let completedQuestions = 0;
+
+    showProgressBar();
+    renderProgressBar(questions.length, completedQuestions);
 
     questions.forEach((q, index) => {
         const wrapper = document.createElement("div");
-        wrapper.className = "quiz-question";
+        wrapper.className = "question";
 
         quizContainer.appendChild(wrapper);
 
@@ -97,6 +244,7 @@ function renderQuiz(questions) {
         q.options.forEach((option) => {
             const btn = document.createElement("button");
             btn.textContent = option.text;
+            btn.className = "quiz-btn";
 
             btn.onclick = () => {
                 if (isQuestionCompleted) return;
@@ -110,7 +258,7 @@ function renderQuiz(questions) {
                 isQuestionCompleted = true;
 
                 quizCorrectOption(optionsContainer, btn);
-                renderProgress(questions.length, ++completedQuestions);
+                renderProgressBar(questions.length, ++completedQuestions);
             };
 
             if (option.correct) {
@@ -167,6 +315,10 @@ async function loadContent() {
 
         case "quiz":
             renderQuiz(content.content);
+            break;
+
+        case "retrieval":
+            renderRetrieval(content.content);
             break;
 
         default:
