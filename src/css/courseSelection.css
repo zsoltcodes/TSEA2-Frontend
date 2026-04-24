@@ -122,3 +122,8 @@ body {
     justify-content: center;
     flex-direction: column;
 }
+
+.link-text {
+    color: white;
+    text-decoration: none;
+}
