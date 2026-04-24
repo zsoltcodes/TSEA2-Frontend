@@ -1,4 +1,4 @@
-import { getUser } from "./api.js";
+import { getUser, request } from "./api.js";
 
 const editDisplayNameBtn = document.getElementById("edit-dsp-name");
 const editDspImgBtn = document.getElementById("edit-dsp-img");
@@ -12,15 +12,10 @@ let isEditing = false;
 
 signoutBtn.addEventListener("click", async () => {
     try {
-        await fetch("/logout", {
-            method: "POST",
-            credentials: "include"
-        });
+        request("/logout", 'POST'); // Need backend implementation
     } catch (err) {
         console.error("Logout request failed:", err);
     }
-
-    window.location.reload();
 })
 
 editDisplayNameBtn.addEventListener("click", () => {
