@@ -109,7 +109,6 @@ body {
 .user-info-part .user-id, .user-info-part .email-ad, .user-info-part .account-no {
     display: flex;
     flex-direction: column;
-
     gap: 20px;
 }
 
@@ -122,8 +121,10 @@ body {
     width: 300px;
     height: 30px;
     border: none;
-    background-color: #CBCBCB;
+    background-color: #e6e6e6;
     border-radius: 10px;
+
+    padding-left: 10px;
 }
 
 .sign-out-part {

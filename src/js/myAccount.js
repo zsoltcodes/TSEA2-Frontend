@@ -1,6 +1,27 @@
+import { getUser } from "./api.js";
+
 const editDisplayNameBtn = document.getElementById("edit-dsp-name");
+const editDspImgBtn = document.getElementById("edit-dsp-img");
+const pointsInput = document.getElementById("points");
+const imgDisplay = document.getElementById("img-here");
+const imgInput = document.getElementById("hidden-input");
+const signoutBtn = document.getElementById("signout-btn");
+const emailAd = document.getElementById("email-input");
 
 let isEditing = false;
+
+signoutBtn.addEventListener("click", async () => {
+    try {
+        await fetch("/logout", {
+            method: "POST",
+            credentials: "include"
+        });
+    } catch (err) {
+        console.error("Logout request failed:", err);
+    }
+
+    window.location.reload();
+})
 
 editDisplayNameBtn.addEventListener("click", () => {
     const displayName = document.getElementById("username");
@@ -19,7 +40,38 @@ editDisplayNameBtn.addEventListener("click", () => {
         displayName.disabled = true;
 
         editDisplayNameBtn.value = "Edit display name";
-
-        // save display name
     }
 })
+
+editDspImgBtn.addEventListener("click", () => {
+    imgInput.click();
+})
+
+imgInput.addEventListener("change", (event) => {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+
+    // [testing] console.log(reader)
+    // note: selected image is at reader.result
+
+    reader.onload = () => {
+        imgDisplay.src = reader.result;
+    }
+
+    reader.readAsDataURL(file);
+})
+
+async function loadUserInfo() {
+    const result = await getUser();
+
+    const points = result.user.points;
+    const emailVal = result.user.email;
+    
+    pointsInput.value = `${points}`;
+    emailAd.value = `${emailVal}`;
+}
+
+loadUserInfo();
+

@@ -15,40 +15,37 @@
             <h1>My Account</h1>
             <div class="pfp-and-points">
                 <div class="pfp-part">
-                    <img class="pfp-src" src="../../public/circle-check-solid-full.svg" width="100px">
+                    <img id="img-here" class="pfp-src" src="../../public/circle-check-solid-full.svg" width="100px">
                     <div class="pfp-editing">
                         <input id="username" class="username" type="text" value="None" disabled>
                         <input id="edit-dsp-name" type="button" value="Edit display name">
-                        <input type="button" value="Edit display image">
+                        <input id="edit-dsp-img" type="button" value="Edit display image">
                     </div>
                 </div>
                 <div class="points-part">
                     <h2>Points</h2>
-                    <input type="text" value="9999" disabled>
+                    <input id="points" type="text" value="9999" disabled>
                 </div>
             </div>
         </div>
         <div class="section-body">
             <div class="user-info-part">
-                <div class="user-id">
-                    <span>User ID</span>
-                    <input class="username-input" type="text">
+                <div class="account-no">
+                    <span>Account Number</span>
+                    <input value="+612 8765 4321" class="acc-no-input" type="text" disabled>
                 </div>
                 <div class="email-ad">
                     <span>Email address</span>
-                    <input class="email-input" type="text">
-                    <input type="button" value="Apply Changes">
-                </div>
-                <div class="account-no">
-                    <span>Account Number</span>
-                    <input class="acc-no-input" type="text" disabled>
+                    <input id="email-input" class="email-input" type="text">
                 </div>
             </div>
             <div class="sign-out-part">
-                <input type="button" value="Sign Out">
+                <input id="signout-btn" type="button" value="Sign Out">
             </div>
         </div>
     </section>
+
+    <input type="file" id="hidden-input" accept="image/*" style="display:none;">
 
     <script type="module" src="../js/loadComponents.js"></script>
     <script type="module" src="../js/api.js"></script>
