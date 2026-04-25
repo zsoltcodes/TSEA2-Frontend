@@ -33,9 +33,7 @@ const nextBtn = document.querySelector(".btn-next");
 const previousBtn = document.querySelector(".btn-previous");
 
 function calculateCompletionProgress(questionsLength, completedQuestions) {
-    const completionPercentage = Math.floor(
-        (completedQuestions / questionsLength) * 100,
-    );
+    const completionPercentage = Math.floor((completedQuestions / questionsLength) * 100);
 
     const remainingQuestions = questionsLength - completedQuestions;
 
@@ -53,15 +51,13 @@ function hideProgressBar() {
 }
 
 function renderProgressBar(questionsLength, completedQuestions) {
-    const { completionPercentage, remainingQuestions } =
-        calculateCompletionProgress(questionsLength, completedQuestions);
+    const { completionPercentage, remainingQuestions } = calculateCompletionProgress(
+        questionsLength,
+        completedQuestions,
+    );
 
-    const questionsAnsweredTextEl = document.getElementById(
-        "questions-answered-text",
-    );
-    const questionsRemainingTextEl = document.getElementById(
-        "questions-remaining-text",
-    );
+    const questionsAnsweredTextEl = document.getElementById("questions-answered-text");
+    const questionsRemainingTextEl = document.getElementById("questions-remaining-text");
 
     questionsAnsweredTextEl.textContent = `${completionPercentage}% Completed`;
     questionsRemainingTextEl.textContent = `${questionsLength - completedQuestions} Question${remainingQuestions != 1 ? "s" : ""} Remaining`;
@@ -79,9 +75,7 @@ function quizCorrectOption(optionsContainer, btn) {
     btn.style.backgroundColor = "green";
     btn.style.color = "white";
 
-    const correctBtn = [...optionsContainer.children].find(
-        (b) => b.dataset.correct === "true",
-    );
+    const correctBtn = [...optionsContainer.children].find((b) => b.dataset.correct === "true");
 
     if (correctBtn) {
         correctBtn.style.backgroundColor = "green";
@@ -117,8 +111,7 @@ function renderRetrievalInput(question, container) {
 
             const expectedAnswer = answers[answerIdx++];
 
-            input.style.width =
-                computeTextWidth(expectedAnswer, "30px Inter") + "px";
+            input.style.width = computeTextWidth(expectedAnswer, "30px Inter") + "px";
 
             container.appendChild(input);
 
@@ -127,10 +120,7 @@ function renderRetrievalInput(question, container) {
                 expectedAnswer,
 
                 isCorrect: () => {
-                    return (
-                        input.value.trim().toLowerCase() ==
-                        expectedAnswer.trim().toLowerCase()
-                    );
+                    return input.value.trim().toLowerCase() == expectedAnswer.trim().toLowerCase();
                 },
             });
         }
@@ -150,11 +140,14 @@ function renderRetrieval(questions) {
         const wrapper = document.createElement("div");
         wrapper.className = "question";
 
+        const leftContainer = document.createElement("div");
+        leftContainer.className = "left-container";
+
         retrievalContainer.appendChild(wrapper);
 
         const title = document.createElement("h3");
         title.textContent = `${idx + 1}. ${q.question}`;
-        wrapper.appendChild(title);
+        leftContainer.appendChild(title);
 
         const retrievalInputContainer = document.createElement("div");
         const expectedInputs = renderRetrievalInput(q, retrievalInputContainer);
@@ -193,8 +186,7 @@ function renderRetrieval(questions) {
             retrievalStatusContainer.style.display = "flex";
 
             if (!allCorrect) {
-                retrievalStatusIconImg.src =
-                    "/public/circle-xmark-solid-full.svg";
+                retrievalStatusIconImg.src = "/public/circle-xmark-solid-full.svg";
                 retrievalStatusText.textContent = "Incorrect";
 
                 return;
@@ -204,15 +196,15 @@ function renderRetrieval(questions) {
             retrievalStatusText.textContent = "Correct!";
 
             checkBtn.disabled = true;
-            expectedInputs.forEach(
-                ({ inputElement }) => (inputElement.disabled = true),
-            );
+            expectedInputs.forEach(({ inputElement }) => (inputElement.disabled = true));
 
             renderProgressBar(questions.length, ++completedQuestions);
         });
 
-        wrapper.appendChild(retrievalInputContainer);
-        wrapper.appendChild(checkBtn);
+        leftContainer.appendChild(retrievalInputContainer);
+        leftContainer.appendChild(checkBtn);
+
+        wrapper.appendChild(leftContainer);
         wrapper.appendChild(retrievalStatusContainer);
 
         retrievalContainer.appendChild(wrapper);
@@ -287,14 +279,13 @@ function initialiseNavigationBtn(button, contentSlug) {
 async function renderLesson({ content }) {
     const html = md.parse(content);
     const contentContainer = document.querySelector(".content-container");
+    contentContainer.classList.add("lesson-content");
     contentContainer.innerHTML = html;
 }
 
 /** Loads the course content provided in the query parameters and populates the page */
 async function loadContent() {
-    const { course, content } = await request(
-        `/courses/${courseSlug}/${contentSlug}`,
-    );
+    const { course, content } = await request(`/courses/${courseSlug}/${contentSlug}`);
 
     document.title = PAGE_TITLE_PREFIX + content.title;
 
