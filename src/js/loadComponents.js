@@ -23,7 +23,7 @@ async function loadComponent(sectionId, filePath, jsRequired = false) {
 
         if (jsRequired) {
             const jsPath = filePath.replace(/\.html$/, ".js");
-            loadJS(jsPath);
+            loadJS(jsPath, true);
         }
     } catch (err) {
         console.error(err);
@@ -64,7 +64,7 @@ function loadCSS(filePath) {
 
 /* Load JS files for Header / Footer */
 
-function loadJS(filePath) {
+function loadJS(filePath, isModule = false) {
     if (
         [...document.querySelectorAll("script")].some((link) =>
             link.src.endsWith(filePath),
@@ -74,6 +74,10 @@ function loadJS(filePath) {
 
     const scriptEl = document.createElement("script");
     scriptEl.src = filePath;
+
+    if (isModule) {
+        scriptEl.type = "module";
+    }
 
     document.body.appendChild(scriptEl);
 }
@@ -113,4 +117,5 @@ if (currentPage == "home") {
 
 /* Header */
 
-loadComponent("header", "../components/header/header.html");
+loadComponent("header", "../components/header/header.html", true);
+loadJS("../js/api.js", true);

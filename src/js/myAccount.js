@@ -1,4 +1,4 @@
-import { getUser, request } from "./api.js";
+import { getUser, logoutUser } from "./api.js";
 
 const editDisplayNameBtn = document.getElementById("edit-dsp-name");
 const editDspImgBtn = document.getElementById("edit-dsp-img");
@@ -12,16 +12,20 @@ let isEditing = false;
 
 signoutBtn.addEventListener("click", async () => {
     try {
-        request("/logout", 'POST'); // Need backend implementation
+        await logoutUser();
+        window.location.assign("./home.html");
     } catch (err) {
         console.error("Logout request failed:", err);
     }
-})
+});
 
 editDisplayNameBtn.addEventListener("click", () => {
     const displayName = document.getElementById("username");
 
-    if (!displayName) { throw new Error("Couldn't retrieve display name element"); return; }
+    if (!displayName) {
+        throw new Error("Couldn't retrieve display name element");
+        return;
+    }
 
     if (!isEditing) {
         isEditing = true;
@@ -36,11 +40,11 @@ editDisplayNameBtn.addEventListener("click", () => {
 
         editDisplayNameBtn.value = "Edit display name";
     }
-})
+});
 
 editDspImgBtn.addEventListener("click", () => {
     imgInput.click();
-})
+});
 
 imgInput.addEventListener("change", (event) => {
     const file = event.target.files[0];
@@ -53,20 +57,19 @@ imgInput.addEventListener("change", (event) => {
 
     reader.onload = () => {
         imgDisplay.src = reader.result;
-    }
+    };
 
     reader.readAsDataURL(file);
-})
+});
 
 async function loadUserInfo() {
     const result = await getUser();
 
     const points = result.user.points;
     const emailVal = result.user.email;
-    
+
     pointsInput.value = `${points}`;
     emailAd.value = `${emailVal}`;
 }
 
 loadUserInfo();
-

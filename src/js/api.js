@@ -20,6 +20,11 @@ export async function request(path, method = "GET") {
 
 let user = null;
 
+export async function logoutUser() {
+    await request("/auth/logout", "DELETE");
+    user = null;
+}
+
 export async function getUser() {
     if (user) return user;
 
