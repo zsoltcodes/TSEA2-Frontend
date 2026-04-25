@@ -4,11 +4,7 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>CodeNest - Courses</title>
-        <link
-            rel="icon"
-            href="../../../public/favicon_CN.png"
-            type="image/x-icon"
-        />
+        <link rel="icon" href="../../../public/favicon_CN.png" type="image/x-icon" />
         <link rel="stylesheet" href="../css/courseSelection.css" />
     </head>
     <body data-page="courses">
@@ -16,11 +12,7 @@
 
         <section class="search-bar-container">
             <div class="search-bar-subcontainer">
-                <input
-                    class="search-bar"
-                    type="search"
-                    placeholder="Search for courses!"
-                />
+                <input id="search-bar" class="search-bar" type="search" placeholder="Search for courses!" />
                 <img src="../../public/search.png" width="20px" />
             </div>
         </section>
@@ -29,50 +21,7 @@
                 <span class="title">Top Courses</span>
             </div>
             <!-- ### JavaScript Card ### -->
-            <div class="course-list">
-                <div class="course-card">
-                    <h1 class="course-title"></h1>
-                    <div class="duration-container">
-                        <img src="../../public/clock.png" width="45px" />
-                        <span class="duration-text"
-                            >Duration: <span class="dur-highlight"></span
-                        ></span>
-                    </div>
-
-                    <div class="difficulty-container">
-                        <img src="../../public/newbie.png" width="45px" />
-                        <span class="difficulty-text"
-                            >Difficulty: <span class="diff-highlight"></span
-                        ></span>
-                    </div>
-
-                    <div class="skills-container">
-                        <div class="skills-label">
-                            <img
-                                src="../../public/skill-development.png"
-                                width="45px"
-                            />
-                            <span class="skills-text"
-                                >Skills
-                                <span class="skills-highlight"
-                                    >Gained</span
-                                ></span
-                            >
-                        </div>
-                        <div class="skills-list"></div>
-                    </div>
-
-                    <div class="link-container">
-                        <a class="link-text" href="./course-overview.html?course=javascript">Take me to the course</a>
-                        <img
-                            src="../../public/external-link.png"
-                            width="45px"
-                        />
-                    </div>
-
-                    <div class="skills-list"></div>
-                </div>
-            </div>
+            <div class="course-list"></div>
         </section>
         <footer id="footer"></footer>
         <script type="module" src="../js/loadComponents.js"></script>

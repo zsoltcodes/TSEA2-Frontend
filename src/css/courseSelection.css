@@ -3,18 +3,18 @@ body {
 }
 
 :root {
-    --primary-color: #B6D2F3;
+    --primary-color: #b6d2f3;
     --secondary-color: #183354;
     --link-text-color: #515151;
-    --link-hover-color: #2E81E0;
-    --link-click-color: #1B3E67;
+    --link-hover-color: #2e81e0;
+    --link-click-color: #1b3e67;
     --link-selected-color: #191919;
-    
-    --text-color: #1B1B1B;
+
+    --text-color: #1b1b1b;
 }
 
 .search-bar-container {
-    background-color: #B6D2F3;
+    background-color: #b6d2f3;
     width: 100%;
     height: 100px;
     display: flex;
@@ -48,7 +48,7 @@ body {
     height: 700px;
     display: flex;
     flex-direction: column;
-    gap: 100px;
+    gap: 50px;
     align-items: flex-start;
     justify-content: flex-start;
     padding: 50px;
@@ -65,7 +65,6 @@ body {
     align-items: flex-start;
     justify-content: flex-start;
     width: 100%;
-    height: 500px;
     gap: 50px;
 }
 
@@ -73,57 +72,57 @@ body {
     width: 100%;
     height: 100%;
     display: flex;
-
 }
 
 .course-title {
+    font-size: 30px;
     color: #ffffff;
+    width: 100%;
+    text-align: center;
 }
 
 .course-card {
-    width: 400px;
-    height: 500px;
-    background-color: #2C2C2C;
+    width: 350px;
+    height: 400px;
+    background-color: #2c2c2c;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
     flex-direction: column;
     border-radius: 10px;
+
+    padding: 0 2em;
 }
 
-.duration-text, .difficulty-text, .skills-text, .link-text {
-    font-size: 25px;
+.course-detail-text {
+    font-size: 20px;
 }
 
-.duration-container, .difficulty-container, .skills-container, .link-container {
+.course-detail-container {
+    display: flex;
+    align-items: center;
+
     width: 100%;
-    height: fit-content;
-    display: flex;
-    align-items: center;
+    height: 3em;
+
+    gap: 30px;
+
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 0.5em 0;
+    border-radius: 10px;
+}
+
+.course-detail-icon {
+    margin: 0 1em;
+}
+
+.course-detail-container:has(.course-link) {
     justify-content: center;
-    gap: 40px;
 }
 
-.skills-container {
-    flex-direction: column;
-    gap: 20px;
-}
-
-.skills-label {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 50px;
-}
-
-.skills-list {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-}
-
-.link-text {
-    color: white;
+.course-link {
+    color: rgb(79, 149, 255);
     text-decoration: none;
+    font-weight: 700;
+    font-size: 20px;
 }

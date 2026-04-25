@@ -1,54 +1,59 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CodeNest - My Account</title>
-    <link rel="icon" href="../../../public/favicon_CN.png" type="image/x-icon"/>
-    <link rel="stylesheet" href="../css/myAccount.css">
-</head>
-<body>
-    <header id="header"></header>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>CodeNest - My Account</title>
+        <link rel="icon" href="../../../public/favicon_CN.png" type="image/x-icon" />
+        <link rel="stylesheet" href="../css/myAccount.css" />
+    </head>
+    <body>
+        <header id="header"></header>
 
-    <section id="section0001">
-        <div class="body-header">
-            <h1>My Account</h1>
-            <div class="pfp-and-points">
-                <div class="pfp-part">
-                    <img id="img-here" class="pfp-src" src="../../public/circle-check-solid-full.svg" width="100px">
-                    <div class="pfp-editing">
-                        <input id="username" class="username" type="text" value="None" disabled>
-                        <input id="edit-dsp-name" type="button" value="Edit display name">
-                        <input id="edit-dsp-img" type="button" value="Edit display image">
+        <section id="section0001">
+            <div class="body-header">
+                <h1>My Account</h1>
+                <div class="pfp-and-points">
+                    <div class="pfp-part">
+                        <img
+                            id="img-here"
+                            class="pfp-src"
+                            src="../../public/circle-check-solid-full.svg"
+                            width="100px"
+                        />
+                        <div class="pfp-editing">
+                            <input id="username" class="username" type="text" value="None" disabled />
+                            <input id="edit-dsp-name" type="button" value="Edit display name" />
+                            <input id="edit-dsp-img" type="button" value="Edit display image" />
+                        </div>
+                    </div>
+                    <div class="points-part">
+                        <h2>Points</h2>
+                        <input id="points" type="text" value="9999" disabled />
                     </div>
                 </div>
-                <div class="points-part">
-                    <h2>Points</h2>
-                    <input id="points" type="text" value="9999" disabled>
+            </div>
+            <div class="section-body">
+                <div class="user-info-part">
+                    <div class="account-no">
+                        <span>Account Number</span>
+                        <input value="+612 8765 4321" class="acc-no-input" type="text" disabled />
+                    </div>
+                    <div class="email-ad">
+                        <span>Email address</span>
+                        <input id="email-input" class="email-input" type="text" />
+                    </div>
+                </div>
+                <div class="sign-out-part">
+                    <input id="signout-btn" type="button" value="Sign Out" />
                 </div>
             </div>
-        </div>
-        <div class="section-body">
-            <div class="user-info-part">
-                <div class="account-no">
-                    <span>Account Number</span>
-                    <input value="+612 8765 4321" class="acc-no-input" type="text" disabled>
-                </div>
-                <div class="email-ad">
-                    <span>Email address</span>
-                    <input id="email-input" class="email-input" type="text">
-                </div>
-            </div>
-            <div class="sign-out-part">
-                <input id="signout-btn" type="button" value="Sign Out">
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <input type="file" id="hidden-input" accept="image/*" style="display:none;">
+        <input type="file" id="hidden-input" accept="image/*" style="display: none" />
 
-    <script type="module" src="../js/loadComponents.js"></script>
-    <script type="module" src="../js/api.js"></script>
-    <script type="module" src="../js/myAccount.js"></script>
-</body>
+        <script type="module" src="../js/loadComponents.js"></script>
+        <script type="module" src="../js/api.js"></script>
+        <script type="module" src="../js/myAccount.js"></script>
+    </body>
 </html>
