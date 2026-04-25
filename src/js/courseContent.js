@@ -129,6 +129,17 @@ function renderRetrievalInput(question, container) {
     return expectedInputs;
 }
 
+function updatePoints(pointsToAdd) {
+    const storedPoints = localStorage.getItem("points");
+    const points = storedPoints ? Number(storedPoints) : 0;
+    
+    const newPointAmount = points + pointsToAdd;
+
+    localStorage.setItem("points", newPointAmount);
+
+    return newPointAmount;
+}
+
 function renderRetrieval(questions) {
     const retrievalContainer = document.querySelector(".questions-container");
     let completedQuestions = 0;
@@ -179,7 +190,7 @@ function renderRetrieval(questions) {
                     allCorrect = false;
                     return;
                 }
-
+                updatePoints(20);
                 inputElement.style.backgroundColor = "lightgreen";
             });
 
@@ -251,6 +262,10 @@ function renderQuiz(questions) {
 
                 quizCorrectOption(optionsContainer, btn);
                 renderProgressBar(questions.length, ++completedQuestions);
+                
+                console.log("Sent points")
+                
+                updatePoints(20);
             };
 
             if (option.correct) {

@@ -52,9 +52,6 @@ imgInput.addEventListener("change", (event) => {
 
     const reader = new FileReader();
 
-    // [testing] console.log(reader)
-    // note: selected image is at reader.result
-
     reader.onload = () => {
         imgDisplay.src = reader.result;
     };
@@ -62,13 +59,31 @@ imgInput.addEventListener("change", (event) => {
     reader.readAsDataURL(file);
 });
 
+function loadPointsLocal() {
+    const points = localStorage.getItem("points");
+    pointsInput.value = String(points);   
+}
+
+function initPoints(pointsFromServer) {
+    const existing = localStorage.getItem("points");
+
+    if (existing === null) {
+        localStorage.setItem("points", pointsFromServer);
+    }
+}
+
 async function loadUserInfo() {
     const result = await getUser();
 
     const points = result.user.points;
     const emailVal = result.user.email;
 
-    pointsInput.value = `${points}`;
+    initPoints(points);
+
+    const localPoints = localStorage.getItem("points");
+    const finalPoints = localPoints !== null ? localPoints : points;
+
+    pointsInput.value = String(finalPoints);
     emailAd.value = `${emailVal}`;
 }
 
