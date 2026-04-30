@@ -59,31 +59,13 @@ imgInput.addEventListener("change", (event) => {
     reader.readAsDataURL(file);
 });
 
-function loadPointsLocal() {
-    const points = localStorage.getItem("points");
-    pointsInput.value = String(points);   
-}
-
-function initPoints(pointsFromServer) {
-    const existing = localStorage.getItem("points");
-
-    if (existing === null) {
-        localStorage.setItem("points", pointsFromServer);
-    }
-}
-
 async function loadUserInfo() {
     const result = await getUser();
 
     const points = result.user.points;
     const emailVal = result.user.email;
 
-    initPoints(points);
-
-    const localPoints = localStorage.getItem("points");
-    const finalPoints = localPoints !== null ? localPoints : points;
-
-    pointsInput.value = String(finalPoints);
+    pointsInput.value = result.user.points;
     emailAd.value = `${emailVal}`;
 }
 

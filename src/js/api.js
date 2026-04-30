@@ -1,13 +1,15 @@
 import { BACKEND_URL } from "./constants.js";
 
 /** Request an endpoint on the backend API, for example: '/courses' */
-export async function request(path, method = "GET") {
+export async function request(path, method = "GET", body) {
+    console.log(body)
     const response = await fetch(
         `${BACKEND_URL}${!path.startsWith("/") ? "/" : ""}${path}`,
         {
             method,
-            headers: { "Content-Type": "json" },
+            headers: { "Content-Type": "application/json" },
             credentials: "include",
+            body: JSON.stringify(body)
         },
     );
 

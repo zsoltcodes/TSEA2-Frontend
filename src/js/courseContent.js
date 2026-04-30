@@ -1,4 +1,4 @@
-import { request } from "./api.js";
+import { request, getUser } from "./api.js";
 import { capitalise } from "./strings.js";
 import { PAGE_TITLE_PREFIX } from "./constants.js";
 import { openContentPage, getIconUrlFromCourseContentType } from "./content.js";
@@ -129,15 +129,10 @@ function renderRetrievalInput(question, container) {
     return expectedInputs;
 }
 
-function updatePoints(pointsToAdd) {
-    const storedPoints = localStorage.getItem("points");
-    const points = storedPoints ? Number(storedPoints) : 0;
-    
-    const newPointAmount = points + pointsToAdd;
-
-    localStorage.setItem("points", newPointAmount);
-
-    return newPointAmount;
+async function updatePoints(pointsToAdd) {
+    const result = await getUser()
+    console.log("Points: ", pointsToAdd)
+    await request(`/users/${result.user.id}/points`, 'PUT', {points: pointsToAdd})
 }
 
 function renderRetrieval(questions) {
@@ -190,8 +185,10 @@ function renderRetrieval(questions) {
                     allCorrect = false;
                     return;
                 }
-                updatePoints(20);
+
                 inputElement.style.backgroundColor = "lightgreen";
+
+                updatePoints(questions[0]["points"])
             });
 
             retrievalStatusContainer.style.display = "flex";
@@ -264,8 +261,6 @@ function renderQuiz(questions) {
                 renderProgressBar(questions.length, ++completedQuestions);
                 
                 console.log("Sent points")
-                
-                updatePoints(20);
             };
 
             if (option.correct) {
