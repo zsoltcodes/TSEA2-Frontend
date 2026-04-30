@@ -2,16 +2,12 @@ import { BACKEND_URL } from "./constants.js";
 
 /** Request an endpoint on the backend API, for example: '/courses' */
 export async function request(path, method = "GET", body) {
-    console.log(body)
-    const response = await fetch(
-        `${BACKEND_URL}${!path.startsWith("/") ? "/" : ""}${path}`,
-        {
-            method,
-            headers: { "Content-Type": "application/json" },
-            credentials: "include",
-            body: JSON.stringify(body)
-        },
-    );
+    const response = await fetch(`${BACKEND_URL}${!path.startsWith("/") ? "/" : ""}${path}`, {
+        method,
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify(body),
+    });
 
     if (!response.ok) {
         alert("An unexpected error occurred.");
@@ -30,6 +26,8 @@ export async function logoutUser() {
 export async function getUser() {
     if (user) return user;
 
-    user = await request("/auth/me");
+    const result = await request("/auth/me");
+    user = result.user;
+
     return user;
 }

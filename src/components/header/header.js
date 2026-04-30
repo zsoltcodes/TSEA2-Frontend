@@ -2,7 +2,7 @@ import { getUser } from "../../js/api.js";
 
 async function loadHeader() {
     const user = await getUser();
-    if (!user || !user.user) return;
+    if (!user) return;
 
     const accountBtn = document.getElementById("account-btn");
     accountBtn.textContent = "My Account";

@@ -60,12 +60,12 @@ imgInput.addEventListener("change", (event) => {
 });
 
 async function loadUserInfo() {
-    const result = await getUser();
+    const user = await getUser();
 
-    const points = result.user.points;
-    const emailVal = result.user.email;
+    const points = user.points;
+    const emailVal = user.email;
 
-    pointsInput.value = result.user.points;
+    pointsInput.value = user.points;
     emailAd.value = `${emailVal}`;
 }
 

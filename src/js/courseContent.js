@@ -129,10 +129,25 @@ function renderRetrievalInput(question, container) {
     return expectedInputs;
 }
 
-async function updatePoints(pointsToAdd) {
-    const result = await getUser()
-    console.log("Points: ", pointsToAdd)
-    await request(`/users/${result.user.id}/points`, 'PUT', {points: pointsToAdd})
+// In future every question should have it's own unique ID regardless of order on the server
+function generateCompletedQuestionKey(questionId) {
+    return `completed:${courseSlug}:${contentSlug}:${questionId}`;
+}
+
+async function updatePoints(pointsToAdd, questionId) {
+    const user = await getUser();
+    if (!user) return;
+
+    const completedQuestionKey = generateCompletedQuestionKey(questionId);
+
+    // Check if the question is already completed to avoid points farming (not a foolproof solution but avoids the average user doing it)
+    if (localStorage.getItem(completedQuestionKey)) {
+        return;
+    }
+
+    localStorage.setItem(completedQuestionKey, true);
+
+    await request(`/users/${user.id}/points`, "PUT", { points: user.points + pointsToAdd });
 }
 
 function renderRetrieval(questions) {
@@ -187,8 +202,7 @@ function renderRetrieval(questions) {
                 }
 
                 inputElement.style.backgroundColor = "lightgreen";
-
-                updatePoints(questions[0]["points"])
+                updatePoints(q.points, idx);
             });
 
             retrievalStatusContainer.style.display = "flex";
@@ -257,10 +271,9 @@ function renderQuiz(questions) {
 
                 isQuestionCompleted = true;
 
+                updatePoints(q.points, index);
                 quizCorrectOption(optionsContainer, btn);
                 renderProgressBar(questions.length, ++completedQuestions);
-                
-                console.log("Sent points")
             };
 
             if (option.correct) {
