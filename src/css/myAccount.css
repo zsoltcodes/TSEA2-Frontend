@@ -40,7 +40,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    
+
     gap: 50px;
 }
 
@@ -78,16 +78,19 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 50px;
+    gap: 20px;
 }
 
-.points-part input {
-    width: fit-content;
-    height: fit-content;
+.points-part h1 {
+    font-weight: 700;
+}
 
-    border: none;
-    font-size: 15px;
-    text-align: center;
+.points {
+    font-size: 40px;
+    font-weight: bold;
+    background-color: var(--primary-color);
+    padding: 0.5em;
+    border-radius: 100%;
 }
 
 .section-body {
@@ -106,7 +109,9 @@ body {
     gap: 50px;
 }
 
-.user-info-part .user-id, .user-info-part .email-ad, .user-info-part .account-no {
+.user-info-part .user-id,
+.user-info-part .email-ad,
+.user-info-part .account-no {
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -135,9 +140,8 @@ body {
     justify-content: center;
 }
 
-
 .sign-out-part input {
-    background-color: #0051FF;
+    background-color: #0051ff;
     color: white;
 
     border: none;

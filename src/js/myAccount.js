@@ -2,7 +2,7 @@ import { getUser, logoutUser } from "./api.js";
 
 const editDisplayNameBtn = document.getElementById("edit-dsp-name");
 const editDspImgBtn = document.getElementById("edit-dsp-img");
-const pointsInput = document.getElementById("points");
+const pointsTextEl = document.getElementById("points");
 const imgDisplay = document.getElementById("img-here");
 const imgInput = document.getElementById("hidden-input");
 const signoutBtn = document.getElementById("signout-btn");
@@ -62,11 +62,10 @@ imgInput.addEventListener("change", (event) => {
 async function loadUserInfo() {
     const user = await getUser();
 
-    const points = user.points;
-    const emailVal = user.email;
+    const { points, email } = user;
 
-    pointsInput.value = user.points;
-    emailAd.value = `${emailVal}`;
+    pointsTextEl.textContent = points;
+    emailAd.value = `${email}`;
 }
 
 loadUserInfo();
